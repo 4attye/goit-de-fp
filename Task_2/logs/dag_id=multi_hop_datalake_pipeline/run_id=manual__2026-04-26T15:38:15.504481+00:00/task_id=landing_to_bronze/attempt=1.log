@@ -1,0 +1,44 @@
+[2026-04-26T15:38:17.756+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: multi_hop_datalake_pipeline.landing_to_bronze manual__2026-04-26T15:38:15.504481+00:00 [queued]>
+[2026-04-26T15:38:17.758+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: multi_hop_datalake_pipeline.landing_to_bronze manual__2026-04-26T15:38:15.504481+00:00 [queued]>
+[2026-04-26T15:38:17.758+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 1
+[2026-04-26T15:38:17.763+0000] {taskinstance.py:1380} INFO - Executing <Task(BashOperator): landing_to_bronze> on 2026-04-26 15:38:15.504481+00:00
+[2026-04-26T15:38:17.766+0000] {standard_task_runner.py:57} INFO - Started process 2305 to run task
+[2026-04-26T15:38:17.767+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'multi_hop_datalake_pipeline', 'landing_to_bronze', 'manual__2026-04-26T15:38:15.504481+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/project_solution.py', '--cfg-path', '/tmp/tmptx2qmiw5']
+[2026-04-26T15:38:17.768+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask landing_to_bronze
+[2026-04-26T15:38:17.783+0000] {task_command.py:415} INFO - Running <TaskInstance: multi_hop_datalake_pipeline.landing_to_bronze manual__2026-04-26T15:38:15.504481+00:00 [running]> on host 180fb072e4d7
+[2026-04-26T15:38:17.917+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='multi_hop_datalake_pipeline' AIRFLOW_CTX_TASK_ID='landing_to_bronze' AIRFLOW_CTX_EXECUTION_DATE='2026-04-26T15:38:15.504481+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-26T15:38:15.504481+00:00'
+[2026-04-26T15:38:17.918+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-04-26T15:38:17.918+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'python /opt/airflow/dags/scripts/landing_to_bronze.py']
+[2026-04-26T15:38:17.925+0000] {subprocess.py:86} INFO - Output:
+[2026-04-26T15:38:18.423+0000] {subprocess.py:93} INFO - Error: LinkageError occurred while loading main class org.apache.spark.launcher.Main
+[2026-04-26T15:38:18.424+0000] {subprocess.py:93} INFO - 	java.lang.UnsupportedClassVersionError: org/apache/spark/launcher/Main has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0
+[2026-04-26T15:38:18.432+0000] {subprocess.py:93} INFO - /home/airflow/.local/lib/python3.11/site-packages/pyspark/bin/spark-class: line 97: CMD: bad array subscript
+[2026-04-26T15:38:18.498+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -   File "/opt/airflow/dags/scripts/landing_to_bronze.py", line 27, in <module>
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -     download_and_save_to_bronze(name, link)
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -   File "/opt/airflow/dags/scripts/landing_to_bronze.py", line 6, in download_and_save_to_bronze
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -     spark = SparkSession.builder.appName(f"LandingToBronze_{table_name}").getOrCreate()
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/sql/session.py", line 557, in getOrCreate
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -     sc = SparkContext.getOrCreate(sparkConf)
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/core/context.py", line 542, in getOrCreate
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -     SparkContext(conf=conf or SparkConf())
+[2026-04-26T15:38:18.499+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/core/context.py", line 206, in __init__
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -     SparkContext._ensure_initialized(self, gateway=gateway, conf=conf)
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/core/context.py", line 463, in _ensure_initialized
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -     SparkContext._gateway = gateway or launch_gateway(conf)
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -                                        ^^^^^^^^^^^^^^^^^^^^
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/java_gateway.py", line 111, in launch_gateway
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO -     raise PySparkRuntimeError(
+[2026-04-26T15:38:18.500+0000] {subprocess.py:93} INFO - pyspark.errors.exceptions.base.PySparkRuntimeError: [JAVA_GATEWAY_EXITED] Java gateway process exited before sending its port number.
+[2026-04-26T15:38:18.542+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-04-26T15:38:18.545+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-04-26T15:38:18.548+0000] {taskinstance.py:1398} INFO - Marking task as FAILED. dag_id=multi_hop_datalake_pipeline, task_id=landing_to_bronze, execution_date=20260426T153815, start_date=20260426T153817, end_date=20260426T153818
+[2026-04-26T15:38:18.559+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 3 for task landing_to_bronze (Bash command failed. The command returned a non-zero exit code 1.; 2305)
+[2026-04-26T15:38:18.581+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-04-26T15:38:18.599+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
